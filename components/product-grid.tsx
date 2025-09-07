@@ -6,21 +6,168 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Search, MessageCircle, Filter } from "lucide-react"
+import { ProductDetailsDialog } from "@/components/product-details-dialog"
 
 const products = [
-  { id: 1, name: "iPhone 1", price: 120, image: "/iphone-smartphone.png", category: "iPhone" },
-  { id: 2, name: "Samsung A51", price: 150, image: "/samsung-galaxy-a51-smartphone.jpg", category: "Samsung" },
-  { id: 3, name: "Samsung S21 Plus", price: 240, image: "/samsung-galaxy-s21-plus-smartphone.jpg", category: "Samsung" },
-  { id: 4, name: "Samsung S23 Ultra", price: 600, image: "/images/products/galaxy-s23.png", category: "Samsung" },
-  { id: 5, name: "Samsung S24 Ultra", price: 750, image: "/samsung-galaxy-s24-ultra.png", category: "Samsung" },
-  { id: 6, name: "Samsung Note 10 Plus", price: 220, image: "/samsung-galaxy-note-10-plus-smartphone.jpg", category: "Samsung" },
-  { id: 7, name: "Samsung Note 20", price: 250, image: "/samsung-galaxy-note-20-smartphone.jpg", category: "Samsung" },
-  { id: 8, name: "Samsung Note 20 Ultra", price: 280, image: "/samsung-galaxy-note-20-ultra-smartphone.jpg", category: "Samsung" },
+  { 
+    id: 1, 
+    name: "iPhone 14", 
+    price: 120, 
+    image: "/iphone-smartphone.png", 
+    category: "iPhone",
+    images: ["/iphone-smartphone.png", "/modern-smartphone-display-showcase.jpg"],
+    description: "Experience the power of iPhone 14 with advanced camera system and A15 Bionic chip.",
+    rating: 4.8,
+    specs: {
+      display: "6.1-inch Super Retina XDR",
+      processor: "A15 Bionic chip",
+      ram: "6GB",
+      storage: "128GB",
+      camera: "12MP Dual camera system",
+      battery: "3279 mAh",
+      os: "iOS 16"
+    }
+  },
+  { 
+    id: 2, 
+    name: "Samsung Galaxy A51", 
+    price: 150, 
+    image: "/samsung-galaxy-a51-smartphone.jpg", 
+    category: "Samsung",
+    images: ["/samsung-galaxy-a51-smartphone.jpg", "/modern-smartphone-display-showcase-with-multiple-p.jpg"],
+    description: "Mid-range smartphone with excellent camera performance and long-lasting battery.",
+    rating: 4.3,
+    specs: {
+      display: "6.5-inch Super AMOLED",
+      processor: "Exynos 9611",
+      ram: "4GB",
+      storage: "128GB",
+      camera: "48MP Quad camera",
+      battery: "4000 mAh",
+      os: "Android 10"
+    }
+  },
+  { 
+    id: 3, 
+    name: "Samsung Galaxy S21 Plus", 
+    price: 240, 
+    image: "/samsung-galaxy-s21-plus-smartphone.jpg", 
+    category: "Samsung",
+    images: ["/samsung-galaxy-s21-plus-smartphone.jpg", "/modern-smartphone-display-showcase.jpg"],
+    description: "Premium flagship with pro-grade camera and 5G connectivity.",
+    rating: 4.6,
+    specs: {
+      display: "6.7-inch Dynamic AMOLED 2X",
+      processor: "Exynos 2100",
+      ram: "8GB",
+      storage: "256GB",
+      camera: "64MP Triple camera",
+      battery: "4800 mAh",
+      os: "Android 11"
+    }
+  },
+  { 
+    id: 4, 
+    name: "Samsung Galaxy S23 Ultra", 
+    price: 600, 
+    image: "/images/products/galaxy-s23.png", 
+    category: "Samsung",
+    images: ["/images/products/galaxy-s23.png", "/samsung-galaxy-s24-ultra.png"],
+    description: "Ultimate flagship with S Pen, 200MP camera, and premium design.",
+    rating: 4.9,
+    specs: {
+      display: "6.8-inch Dynamic AMOLED 2X",
+      processor: "Snapdragon 8 Gen 2",
+      ram: "12GB",
+      storage: "512GB",
+      camera: "200MP Quad camera",
+      battery: "5000 mAh",
+      os: "Android 13"
+    }
+  },
+  { 
+    id: 5, 
+    name: "Samsung Galaxy S24 Ultra", 
+    price: 750, 
+    image: "/samsung-galaxy-s24-ultra.png", 
+    category: "Samsung",
+    images: ["/samsung-galaxy-s24-ultra.png", "/images/products/galaxy-s23.png"],
+    description: "Latest flagship with AI features, titanium build, and enhanced S Pen.",
+    rating: 4.9,
+    specs: {
+      display: "6.8-inch Dynamic AMOLED 2X",
+      processor: "Snapdragon 8 Gen 3",
+      ram: "12GB",
+      storage: "512GB",
+      camera: "200MP Quad camera with AI",
+      battery: "5000 mAh",
+      os: "Android 14"
+    }
+  },
+  { 
+    id: 6, 
+    name: "Samsung Galaxy Note 10 Plus", 
+    price: 220, 
+    image: "/samsung-galaxy-note-10-plus-smartphone.jpg", 
+    category: "Samsung",
+    images: ["/samsung-galaxy-note-10-plus-smartphone.jpg", "/samsung-galaxy-note-20-smartphone.jpg"],
+    description: "Productivity powerhouse with S Pen and large display.",
+    rating: 4.5,
+    specs: {
+      display: "6.8-inch Dynamic AMOLED",
+      processor: "Exynos 9825",
+      ram: "12GB",
+      storage: "256GB",
+      camera: "12MP Triple camera",
+      battery: "4300 mAh",
+      os: "Android 9"
+    }
+  },
+  { 
+    id: 7, 
+    name: "Samsung Galaxy Note 20", 
+    price: 250, 
+    image: "/samsung-galaxy-note-20-smartphone.jpg", 
+    category: "Samsung",
+    images: ["/samsung-galaxy-note-20-smartphone.jpg", "/samsung-galaxy-note-20-ultra-smartphone.jpg"],
+    description: "Enhanced Note experience with improved S Pen and 5G support.",
+    rating: 4.4,
+    specs: {
+      display: "6.7-inch Super AMOLED Plus",
+      processor: "Exynos 990",
+      ram: "8GB",
+      storage: "256GB",
+      camera: "64MP Triple camera",
+      battery: "4300 mAh",
+      os: "Android 10"
+    }
+  },
+  { 
+    id: 8, 
+    name: "Samsung Galaxy Note 20 Ultra", 
+    price: 280, 
+    image: "/samsung-galaxy-note-20-ultra-smartphone.jpg", 
+    category: "Samsung",
+    images: ["/samsung-galaxy-note-20-ultra-smartphone.jpg", "/samsung-galaxy-note-20-smartphone.jpg"],
+    description: "Premium Note with 108MP camera and ultra-responsive S Pen.",
+    rating: 4.7,
+    specs: {
+      display: "6.9-inch Dynamic AMOLED 2X",
+      processor: "Exynos 990",
+      ram: "12GB",
+      storage: "512GB",
+      camera: "108MP Triple camera",
+      battery: "4500 mAh",
+      os: "Android 10"
+    }
+  },
 ]
 
 export function ProductGrid() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
+  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   const categories = ["All", "iPhone", "Samsung"]
 
@@ -89,7 +236,14 @@ export function ProductGrid() {
                   <div className="text-2xl font-bold text-primary">${product.price}</div>
 
                   <div className="flex gap-2">
-                    <Button size="sm" className="flex-1">
+                    <Button 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => {
+                        setSelectedProduct(product)
+                        setDialogOpen(true)
+                      }}
+                    >
                       View Details
                     </Button>
                     <Button variant="outline" size="sm">
@@ -107,6 +261,12 @@ export function ProductGrid() {
             <p className="text-muted-foreground">No products found matching your criteria.</p>
           </div>
         )}
+
+        <ProductDetailsDialog
+          product={selectedProduct}
+          open={dialogOpen}
+          onOpenChange={setDialogOpen}
+        />
       </div>
     </section>
   )
