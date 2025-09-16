@@ -1,35 +1,49 @@
+"use client"
+
+import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Star, MessageCircle } from "lucide-react"
+import { ProductDetailsDialog } from "@/components/product-details-dialog"
 
 const featuredProducts = [
   {
     id: 1,
-    name: "Samsung S24 Ultra",
-    price: 750,
-    image: "/samsung-galaxy-s24-ultra.png",
-    badge: "Premium",
+    name: "iPhone 16 Pro Max",
+    price: 1250,
+    image: "/products/iphone/iphone-16-pro-max/image-1.png",
+    badge: "Latest",
     rating: 5,
-    features: ["200MP Camera", "8K Video", "S Pen Included"],
+    features: ["A18 Pro Chip", "48MP Triple Camera", "6.9-inch Display"],
+    category: "iPhone",
   },
   {
     id: 2,
-    name: "Samsung S23 Ultra",
-    price: 600,
-    image: "/images/products/galaxy-s23.png",
-    badge: "Popular",
+    name: "Samsung Galaxy Note 20 Ultra",
+    price: 280,
+    image: "/products/samsung/galaxy-note-20-ultra/image-1.png",
+    badge: "S Pen",
     rating: 5,
-    features: ["108MP Camera", "5G Ready", "Premium Display"],
+    features: ["108MP Camera", "S Pen Included", "6.9-inch Display"],
+    category: "Samsung",
   },
 ]
 
 export function FeaturedProducts() {
+  const [selectedProduct, setSelectedProduct] = useState<typeof featuredProducts[0] | null>(null)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  const handleProductClick = (product: typeof featuredProducts[0]) => {
+    setSelectedProduct(product)
+    setIsDialogOpen(true)
+  }
+
   return (
     <section className="py-16 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Featured Premium Phones</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">On Promotion</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Discover our top-selling premium smartphones with cutting-edge technology and unbeatable prices.
           </p>
@@ -39,7 +53,8 @@ export function FeaturedProducts() {
           {featuredProducts.map((product) => (
             <Card
               key={product.id}
-              className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/50 bg-card"
+              className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/50 bg-card cursor-pointer"
+              onClick={() => handleProductClick(product)}
             >
               <CardContent className="p-6">
                 <div className="relative mb-6">
@@ -74,11 +89,20 @@ export function FeaturedProducts() {
                   </ul>
 
                   <div className="flex gap-3 pt-4">
-                    <Button className="flex-1 bg-primary hover:bg-primary/90">View Details</Button>
+                    <Button 
+                      className="flex-1 bg-primary hover:bg-primary/90"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleProductClick(product)
+                      }}
+                    >
+                      View Details
+                    </Button>
                     <Button
                       variant="outline"
                       size="icon"
                       className="border-accent text-accent hover:bg-accent hover:text-accent-foreground bg-transparent"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <MessageCircle className="h-4 w-4" />
                     </Button>
@@ -89,6 +113,12 @@ export function FeaturedProducts() {
           ))}
         </div>
       </div>
+      
+      <ProductDetailsDialog
+        product={selectedProduct}
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+      />
     </section>
   )
 }
