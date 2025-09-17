@@ -58,7 +58,7 @@ export function Hero() {
           <div className="relative">
             <div className="relative z-10 bg-card rounded-3xl p-8 shadow-xl">
               <img
-                src="/samsung-galaxy-s24-ultra.png"
+                src="/pals_bg.jpeg"
                 alt="Premium smartphones showcase"
                 className="w-full h-auto rounded-2xl"
               />
