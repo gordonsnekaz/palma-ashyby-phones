@@ -3,7 +3,7 @@ import { ArrowRight, Star } from "lucide-react"
 
 export function Hero() {
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden" style={{backgroundImage: 'url(/pals_bg.jpeg)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
+    <section className="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-br from-background to-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
@@ -58,7 +58,7 @@ export function Hero() {
           <div className="relative">
             <div className="relative z-10 bg-card rounded-3xl p-8 shadow-xl">
               <img
-                src="/modern-smartphone-display-showcase.jpg"
+                src="/samsung-galaxy-s24-ultra.png"
                 alt="Premium smartphones showcase"
                 className="w-full h-auto rounded-2xl"
               />
